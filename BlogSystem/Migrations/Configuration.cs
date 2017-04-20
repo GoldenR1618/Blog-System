@@ -1,11 +1,12 @@
 namespace BlogSystem.Migrations
 {
+    using BlogSystem.Models;
     using System;
     using System.Data.Entity;
     using System.Data.Entity.Migrations;
     using System.Linq;
 
-    public sealed class Configuration : DbMigrationsConfiguration<BlogSystem.Models.BlogDbContext>
+    public sealed class Configuration : DbMigrationsConfiguration<BlogDbContext>
     {
         public Configuration()
         {
@@ -13,7 +14,7 @@ namespace BlogSystem.Migrations
             AutomaticMigrationDataLossAllowed = true;
         }
 
-        protected override void Seed(BlogSystem.Models.BlogDbContext context)
+        protected override void Seed(BlogDbContext context)
         {
             //  This method will be called after migrating to the latest version.
 
