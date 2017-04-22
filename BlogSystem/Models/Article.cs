@@ -13,7 +13,7 @@ namespace BlogSystem.Models
         public int Id { get; set; }
 
         [Required]
-        [StringLength(255)]
+        [StringLength(400)]
         public string Title { get; set; }
 
         [Required]
@@ -21,6 +21,8 @@ namespace BlogSystem.Models
 
         [ForeignKey("Author")]
         public string AuthorId { get; set; }
+
+        public string ImagePath { get; set; }
 
         public virtual ApplicationUser Author { get; set; }
 

@@ -11,7 +11,7 @@ namespace BlogSystem.Models
         public int Id { get; set; }
 
         [Required]
-        [StringLength(50)]
+        [StringLength(400)]
         public string Title { get; set; }
 
         [Required]

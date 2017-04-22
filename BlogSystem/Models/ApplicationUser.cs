@@ -14,7 +14,7 @@ namespace BlogSystem.Models
     public class ApplicationUser : IdentityUser
     {
         [Required]
-        [StringLength(50)]
+        [StringLength(70)]
         public string FullName { get; set; }
 
         public async Task<ClaimsIdentity> GenerateUserIdentityAsync(UserManager<ApplicationUser> manager)

@@ -72,7 +72,7 @@ namespace BlogSystem.Controllers
         // POST: Article/Create
         [Authorize]
         [HttpPost]
-        public ActionResult Create(Article article)
+        public ActionResult Create(Article article, HttpPostedFileBase image)
         {
             if (ModelState.IsValid)
             {
@@ -84,6 +84,27 @@ namespace BlogSystem.Controllers
 
                     // Set articlea author
                     article.AuthorId = authorId;
+
+                    // Upload image. Check allowed types.
+                    if (image != null)
+                    {
+                        var allowedContentTypes = new[] { "image/jpeg", "image/jpg", "image/png", "image/gif", "image/tif" };
+
+                        if (allowedContentTypes.Contains(image.ContentType))
+                        {
+                            var imagesPath = "/Content/Images/";
+
+                            var filename = image.FileName;
+
+                            var uploadPath = imagesPath + filename;
+
+                            var physicalPath = Server.MapPath(uploadPath);
+
+                            image.SaveAs(physicalPath);
+
+                            article.ImagePath = uploadPath;
+                        }
+                    }
 
                     // Save article in DB
                     database.Articles.Add(article);
