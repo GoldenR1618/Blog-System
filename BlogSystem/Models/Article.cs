@@ -30,5 +30,16 @@ namespace BlogSystem.Models
         {
             return this.Author.UserName.Equals(name);
         }
+
+        public string PreviewText(string text)
+        {
+            if (text.Length <= 300 || text == null)
+            {
+                return text;
+            }
+
+            var cutText = text.Substring(0, 300) + " ...";
+            return cutText;
+        }
     }
 }
