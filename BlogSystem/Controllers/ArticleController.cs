@@ -34,6 +34,23 @@ namespace BlogSystem.Controllers
         }
 
         //
+        // Get: Article/AllArticles
+        [HttpGet]
+        public ActionResult AllArticles()
+        {
+            using (var database = new BlogDbContext())
+            {
+                // Get author id
+                var authorId = database.Users.Where(u => u.UserName == this.User.Identity.Name).First().Id;
+
+                // Get article from database
+                var articles = database.Articles.Where(u => u.AuthorId == authorId).ToList();
+
+                return View(articles);
+            }
+        }
+
+        //
         // GET: Article/Details
         [HttpGet]
         public ActionResult Details(int? id)

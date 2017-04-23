@@ -266,6 +266,7 @@
     <Content Include="Views\Article\Delete.cshtml" />
     <Content Include="Views\Article\Edit.cshtml" />
     <Content Include="Views\Manage\AddUserImage.cshtml" />
+    <Content Include="Views\Article\AllArticles.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
