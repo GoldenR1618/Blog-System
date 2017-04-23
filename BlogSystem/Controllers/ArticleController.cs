@@ -102,6 +102,9 @@ namespace BlogSystem.Controllers
                     // Set articlea author
                     article.AuthorId = authorId;
 
+                    // Set datetime
+                    article.DatePost = DateTime.Now;
+
                     // Upload image. Check allowed types.
                     if (image != null)
                     {

@@ -24,6 +24,8 @@ namespace BlogSystem.Models
 
         public string ImagePath { get; set; }
 
+        public DateTime DatePost { get; set; }
+
         public virtual ApplicationUser Author { get; set; }
 
         public bool IsAuthor(string name)

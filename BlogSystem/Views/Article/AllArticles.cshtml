@@ -14,6 +14,9 @@
                         <h2>
                             @Html.ActionLink(@article.Title, "Details", "Article", new { @id = article.Id }, null)
                         </h2>
+                        <h5 class="author">
+                            Date: @article.DatePost
+                        </h5>
                     </header>
                     <p>
                         @article.PreviewText(article.Content)
@@ -21,7 +24,7 @@
                     </p>
                     <footer class="pull-right">
                         <small class="author">
-                            --author @article.Author.FullName
+                            Author @article.Author.FullName
                         </small>
                     </footer>
                 </article>
