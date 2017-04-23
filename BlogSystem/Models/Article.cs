@@ -38,8 +38,7 @@ namespace BlogSystem.Models
                 return text;
             }
 
-            var cutText = text.Substring(0, 300) + " ...";
-            return cutText;
+            return text.Substring(0, 300) + " ...";
         }
     }
 }

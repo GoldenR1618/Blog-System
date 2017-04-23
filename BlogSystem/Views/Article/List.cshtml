@@ -17,6 +17,7 @@
                     </header>
                     <p>
                         @article.PreviewText(article.Content)
+                        <small class="btn-link">@Html.ActionLink("Read more", "Details", "Article", new { @id = article.Id }, null)</small>
                     </p>
                     <footer class="pull-right">
                         <small class="author">
