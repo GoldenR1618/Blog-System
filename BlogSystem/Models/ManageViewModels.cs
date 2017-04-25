@@ -83,4 +83,11 @@ namespace BlogSystem.Models
         public string SelectedProvider { get; set; }
         public ICollection<System.Web.Mvc.SelectListItem> Providers { get; set; }
     }
+
+    public class AddUserImageViewModel
+    {
+        [Required]
+        [Display(Name = "User Image")]
+        public string UserImagePath { get; set; }
+    }
 }

@@ -32,9 +32,9 @@ namespace BlogSystem.Controllers
             {
                 return _signInManager ?? HttpContext.GetOwinContext().Get<ApplicationSignInManager>();
             }
-            private set 
-            { 
-                _signInManager = value; 
+            private set
+            {
+                _signInManager = value;
             }
         }
 
@@ -333,7 +333,60 @@ namespace BlogSystem.Controllers
             base.Dispose(disposing);
         }
 
-#region Helpers
+        //
+        // GET: /Manage/AddUserImage
+        public ActionResult AddUserImage()
+        {
+            return View();
+        }
+
+        //
+        // POST: /Manage/AddUserImage
+        [Authorize]
+        [HttpPost]
+        public ActionResult AddUserImage(ApplicationUser user, HttpPostedFileBase image)
+        {
+            //if (ModelState.IsValid)
+            //{
+            // Insert in database
+            using (var database = new BlogDbContext())
+            {
+
+                var userUserImage = database.Users.Where(u => u.UserName == this.User.Identity.Name).First().UserImage;
+
+                // Upload image. Check allowed types.
+                if (image != null)
+                {
+                    var allowedContentTypes = new[] { "image/jpeg", "image/jpg", "image/png", "image/gif", "image/tif" };
+
+                    if (allowedContentTypes.Contains(image.ContentType))
+                    {
+                        var imagesPath = "/Content/UserImages/";
+
+                        var filename = image.FileName;
+
+                        var uploadPath = imagesPath + filename;
+
+                        var physicalPath = Server.MapPath(uploadPath);
+
+                        image.SaveAs(physicalPath);
+
+                        userUserImage = uploadPath;
+                    }
+                }
+
+                // Save article in DB
+                database.Users.Where(u => u.UserName == this.User.Identity.Name).First().UserImage = userUserImage;
+                database.SaveChanges();
+
+                return RedirectToAction("Index");
+            }
+            //}
+
+            //return View(user);
+        }
+
+        #region Helpers
         // Used for XSRF protection when adding external logins
         private const string XsrfKey = "XsrfId";
 
@@ -384,6 +437,6 @@ namespace BlogSystem.Controllers
             Error
         }
 
-#endregion
+        #endregion
     }
 }
