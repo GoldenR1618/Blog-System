@@ -70,9 +70,20 @@ namespace BlogSystem.Controllers
                 PhoneNumber = await UserManager.GetPhoneNumberAsync(userId),
                 TwoFactor = await UserManager.GetTwoFactorEnabledAsync(userId),
                 Logins = await UserManager.GetLoginsAsync(userId),
+                UserImage = GetUserImagePath(userId),
                 BrowserRemembered = await AuthenticationManager.TwoFactorBrowserRememberedAsync(userId)
             };
             return View(model);
+        }
+
+        private string GetUserImagePath(string userId)
+        {
+            using (var database = new BlogDbContext())
+            {
+                var userUserImage = database.Users.Where(u => u.UserName == this.User.Identity.Name).First().UserImage;
+
+                return userUserImage;
+            }
         }
 
         //
