@@ -51,6 +51,25 @@ namespace BlogSystem.Controllers
         }
 
         //
+        // Get: Article/IFeelLucky
+        [HttpGet]
+        public ActionResult IFeelLucky()
+        {
+            using (var database = new BlogDbContext())
+            {
+                // Get count articles from database
+                var countArticles = database.Articles.Count();
+
+                // Get random article from article list
+                Random random = new Random();
+                int randomNum = random.Next(1, countArticles - 2);
+                var articles = database.Articles.Include(a => a.Author).OrderBy(a => a.Id).Skip(randomNum).Take(1).ToList();
+
+                return View(articles);
+            }
+        }
+
+        //
         // GET: Article/Details
         [HttpGet]
         public ActionResult Details(int? id)
